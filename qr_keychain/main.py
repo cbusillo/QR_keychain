@@ -10,8 +10,8 @@ from solid2 import cube, cylinder, hull, text, set_global_fn, union
 
 @dataclass
 class Args:
-    start_index: int = 1
-    end_index: int = 1
+    start_index: int
+    end_index: int
     output_dir: Path = Path("output")
     token_width: float = 50.0
     token_height: float = 60.0
@@ -99,8 +99,8 @@ def add_text(data: str, size: float, depth):
 
 def parse_args() -> Args:
     parser = argparse.ArgumentParser(description="Create keychain models")
-    parser.add_argument("--start-index", type=int, default=Args.start_index, help="Starting index for keychain tags")
-    parser.add_argument("--end-index", type=int, default=Args.end_index, help="Ending index for keychain tags")
+    parser.add_argument("--start-index", type=int, help="Starting index for keychain tags", required=True)
+    parser.add_argument("--end-index", type=int,  help="Ending index for keychain tags", required=True)
     parser.add_argument("--output-dir", type=Path, default=Args.output_dir, help="Output directory for 3mf files")
     parser.add_argument("--token-width", type=float, default=Args.token_width, help="Width of the keychain token")
     parser.add_argument("--token-height", type=float, default=Args.token_height, help="Height of the keychain token")
@@ -132,7 +132,7 @@ def prepare_output_directory(output_dir: Path) -> None:
     output_dir.mkdir(parents=True, exist_ok=True)
 
 
-def main() -> None:
+def generate_plate() -> None:
     args = parse_args()
     prepare_output_directory(args.output_dir)
     set_global_fn(100)
@@ -215,4 +215,4 @@ def save_models(body: union, colored: union, index: int, output_dir: Path) -> No
 
 
 if __name__ == "__main__":
-    main()
+    generate_plate()
