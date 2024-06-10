@@ -1,3 +1,7 @@
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
+
 [tool.poetry]
 name = "qr-keychain"
 version = "0.1.0"
@@ -7,10 +11,8 @@ readme = "README.md"
 
 [tool.poetry.dependencies]
 python = "^3.11"
-qrcode = {extras = ["pil"], version = "^7.4.2"}
+qrcode = { extras = ["pil"], version = "^7.4.2" }
 solidpython2 = "^2.1.0"
 
-
-[build-system]
-requires = ["poetry-core"]
-build-backend = "poetry.core.masonry.api"
+[tool.poetry.scripts]
+qr-keychain = "qr_keychain.main:generate_plate"
